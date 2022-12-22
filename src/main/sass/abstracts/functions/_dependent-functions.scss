@@ -1,0 +1,22 @@
+/*
+================================================================================
+
+    This file is for application dependent functions on variables,
+    do NOT write any styles here.
+
+================================================================================
+*/
+
+@use "sass:math";
+@use "sass:meta";
+
+@use "../functions/_independent-functions.scss" as *;
+@use "../variables/__index.scss" as *;
+
+@function px-to-em($pixels, $default-font-size: $default-font-size) {
+    $pixel: strip-unit($pixels);
+
+    $em: calc(($pixel / $default-font-size) * 1em);
+
+    @return $em;
+}

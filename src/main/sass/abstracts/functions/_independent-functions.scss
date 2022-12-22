@@ -1,0 +1,30 @@
+/*
+================================================================================
+
+    This file is for application independent functions,
+    do NOT write any styles here.
+
+================================================================================
+*/
+
+@use "sass:math";
+
+/* Remove units from css unit value */
+@function strip-unit($number) {
+    $message: "";
+
+    @if (type-of($number) !="number") {
+        $message: 'Parameter $number: ("#{$number}") is not a number.';
+    }
+
+    @if ($message !="") {
+        @warn $message;
+        @error $message;
+    }
+
+    @if (not unitless($number)) {
+        $number: math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
