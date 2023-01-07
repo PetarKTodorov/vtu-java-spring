@@ -11166,11 +11166,6 @@ h6 {
   font-size: var(--font-size-heading-6);
 }
 
-p {
-  max-width: 60ch;
-  margin-bottom: 0.3em;
-}
-
 b,
 strong {
   font-weight: 700;
@@ -11192,6 +11187,14 @@ strong {
 
 ================================================================================
 */
+.application {
+  position: relative;
+}
+.application__footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 /*
 ================================================================================
 
@@ -11272,6 +11275,10 @@ strong {
   content: "\f015";
 }
 
+.logo {
+  max-height: 40px;
+}
+
 /*
 ================================================================================
 
@@ -11300,6 +11307,30 @@ strong {
 
 ================================================================================
 */
+.t-centar {
+  text-align: center;
+}
+
+.t-right {
+  text-align: right;
+}
+
+hr.separator {
+  background-color: rgb(233, 174, 13);
+  height: 10px;
+  border: none;
+  margin: 0;
+}
+
+.table-header {
+  background-color: rgb(233, 174, 13);
+  color: white;
+}
+
+.test {
+  color: rgb(233, 174, 13);
+}
+
 /*
 ================================================================================
 

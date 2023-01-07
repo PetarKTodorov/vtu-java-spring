@@ -5,7 +5,91 @@
 </head>
 <body>
     <section layout:fragment="main-content" class="">
-        Home
+        <div class="container">
+            <h1 class="text-center my-5">All Taxis</h1>
+
+            <form th:action="@{/}" th:method="POST" th:object="${searchBM}" enctype="multipart/form-data" class="mb-3">
+                <div class="mb-3">
+                    <label for="companyName" class="form-label">Company name</label>
+                    <input th:field="*{companyName}" type="text" class="form-control" id="companyName" placeholder="Search taxis" aria-describedby="inputCompanyNameError">
+                    <div id="inputCompanyNameError" th:errors="*{companyName}" class="form-text"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+            <th:block th:if="${taxis}">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div th:each="t : ${taxis}" th:object="${t}" class="col">
+                        <div class="card h-100">
+                            <img src="/images/logo.png" alt="a1" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="*{companyName}"></h5>
+                                <p class="card-text mb-2">
+                                    <strong>Phones: </strong>
+                                    <span th:text="*{phones}"></span>
+                                </p>
+                                <p class="card-text">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th class="t-centar" scope="col" colSpan="4">Prices</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th colSpan="2">Initial Fee</th>
+                                        <td class="t-right" colSpan="2" th:text="*{initialFee} + ' leva'"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colSpan="2">Daily Rate (06:00h - 22:00h)</th>
+                                        <td class="t-right" colSpan="2" th:text="*{dailyRatePerKilometer} + 'leva per kilometer'"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colSpan="2">Night Rate (22:00h - 06:00h)</th>
+                                        <td class="t-right" colSpan="2" th:text="*{nightRatePerKilometer} + 'leva per kilometer'"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colSpan="2">Call Cost</th>
+                                        <td class="t-right" colSpan="2" th:text="*{callPrice} + ' leva'"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <p><small class="text-muted">Last updated on: <span th:text="*{#dates.format(lastUpdated, 'dd-MM-yyyy HH:mm')}"></span></small></p>
+                                <p>
+                                    <small class="text-muted">Likes:
+                                            <span th:text="*{likedUsers.size()}"></span>
+                                    </small>
+                                </p>
+                                <th:block th:if="${@currentUser.username != null}">
+                                    <section className="t-centar">
+                                        <header>
+                                            <h6>Actions</h6>
+                                        </header>
+                                        <section className="actions-links">
+                                            <th:block th:if="${@currentUser.username.equals('admin')}">
+                                                <a th:href="@{/taxi/edit/{id}(id = *{id})}" class="btn btn-warning">Edit</a>
+                                                <a th:href="@{/taxi/delete/{id}(id = *{id})}" class="btn btn-danger">Delete</a>
+                                            </th:block>
+                                            <a th:href="@{/users/like/{id}(id = *{id})}" class="btn btn-primary">Like</a>
+                                        </section>
+                                    </section>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+            <th:block th:unless="${taxis}">
+                <div class="mt-5">
+                    No found results
+                </div>
+            </th:block>
+        </div>
     </section>
 </body>
 </html>

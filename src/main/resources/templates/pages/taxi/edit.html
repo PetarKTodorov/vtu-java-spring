@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<section layout:fragment="main-content">
+    <div class="container">
+        <h1 class="text-center my-5">Create taxi</h1>
+
+        <th:block th:replace="fragments/shared::error-message"></th:block>
+
+        <form th:action="@{/taxi/edit/{id}(id = *{id})}" th:method="POST" th:object="${taxiBM}" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="companyName" class="form-label">Company name</label>
+                <input th:field="*{companyName}" type="text" class="form-control" id="companyName" aria-describedby="inputCompanyNameError">
+                <div id="inputCompanyNameError" th:errors="*{companyName}" class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="phones" class="form-label">Phones</label>
+                <input th:field="*{phones}" type="text" class="form-control" id="phones" aria-describedby="inputPhonesError">
+                <div id="inputPhonesError" th:errors="*{phones}" class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="webSiteLink" class="form-label">Web site link</label>
+                <input th:field="*{webSiteLink}" type="text" class="form-control" id="webSiteLink" aria-describedby="inputWebSiteLinkError">
+                <div id="inputWebSiteLinkError" th:errors="*{webSiteLink}" class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="callPrice" class="form-label">Call price</label>
+                <input th:field="*{callPrice}" type="number" class="form-control" id="callPrice" aria-describedby="inputCallPriceError">
+                <div id="inputCallPriceError" th:errors="*{callPrice}" class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="initialFee" class="form-label">Initial fee</label>
+                <input th:field="*{initialFee}" type="number" class="form-control" id="initialFee" aria-describedby="inputInitialFeeError">
+                <div id="inputInitialFeeError" th:errors="*{initialFee}" class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="dailyRatePerKilometer" class="form-label">Daily rate per kilometer</label>
+                <input th:field="*{dailyRatePerKilometer}" type="number" class="form-control" id="dailyRatePerKilometer" aria-describedby="inputDailyRatePerKilometerError">
+                <div id="inputDailyRatePerKilometerError" th:errors="*{dailyRatePerKilometer}" class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="nightRatePerKilometer" class="form-label">Night rate per kilometer</label>
+                <input th:field="*{nightRatePerKilometer}" type="number" class="form-control" id="nightRatePerKilometer" aria-describedby="inputNightRatePerKilometerError">
+                <div id="inputNightRatePerKilometerError" th:errors="*{nightRatePerKilometer}" class="form-text"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

@@ -4,6 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "copy:js": "copyfiles -u 1 ./node_modules/bootstrap/dist/js/bootstrap.bundle.js src/main/resources/static/js/vendors/",
         "copy": "npm-run-all copy:*",
         "watch:sass": "sass --watch src/main/sass/application-styles.scss src/main/resources/static/css/application-styles.css",
         "build:sass": "sass --no-source-map src/main/sass/application-styles.scss:src/main/resources/static/css/application-styles.css",

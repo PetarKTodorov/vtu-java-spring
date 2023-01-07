@@ -6,11 +6,17 @@
 <body>
 <section layout:fragment="main-content">
     <div class="container">
-        <h1 class="text-center my-5">Login</h1>
+        <h1 class="text-center my-5">Register</h1>
 
         <th:block th:replace="fragments/shared::error-message"></th:block>
 
-        <form th:action="@{/users/login}" th:method="POST" th:object="${userLoginBM}" enctype="multipart/form-data">
+        <form th:action="@{/users/register}" th:method="POST" th:object="${userRegisterBM}" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input th:field="*{username}" type="text" class="form-control" id="username" aria-describedby="inputUsernameError">
+                <div id="inputUsernameError" th:errors="*{username}" class="form-text"></div>
+            </div>
+
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input th:field="*{email}" type="email" class="form-control" id="email" aria-describedby="inputEmailError">
@@ -23,7 +29,13 @@
                 <div id="inputPasswordError" th:errors="*{password}" class="form-text"></div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="mb-3">
+                <label for="inputConfirmPassword" class="form-label">Confirm password</label>
+                <input th:field="*{confirmPassword}" type="password" class="form-control" id="inputConfirmPassword" aria-describedby="inputConfirmPasswordError">
+                <div id="inputConfirmPasswordError" th:errors="*{confirmPassword}" class="form-text"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
 </section>
